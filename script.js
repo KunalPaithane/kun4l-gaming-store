@@ -1,10 +1,7 @@
 /* =====================================================
    KUN4L GAMING STORE
-   JavaScript
+   UPGRADED JAVASCRIPT
 ===================================================== */
-
-
-/* ================= CART DATA ================= */
 
 let cart = [];
 
@@ -12,123 +9,205 @@ let cart = [];
 /* ================= ELEMENTS ================= */
 
 const cartButton = document.getElementById("cartButton");
-
 const cartPanel = document.getElementById("cartPanel");
-
 const closeCart = document.getElementById("closeCart");
-
 const overlay = document.getElementById("overlay");
-
 const cartItems = document.getElementById("cartItems");
-
 const cartCount = document.getElementById("cartCount");
-
 const cartTotal = document.getElementById("cartTotal");
-
 const checkoutBtn = document.getElementById("checkoutBtn");
 
 
-/* ================= OPEN CART ================= */
+/* ================= LOAD CART ================= */
+
+function loadCart() {
+
+    try {
+
+        const savedCart =
+            localStorage.getItem("kun4lCart");
+
+        if (savedCart) {
+
+            const parsedCart =
+                JSON.parse(savedCart);
+
+            if (Array.isArray(parsedCart)) {
+                cart = parsedCart;
+            }
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Could not load cart:",
+            error
+        );
+
+        cart = [];
+    }
+}
+
+
+/* ================= SAVE CART ================= */
+
+function saveCart() {
+
+    try {
+
+        localStorage.setItem(
+            "kun4lCart",
+            JSON.stringify(cart)
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Could not save cart:",
+            error
+        );
+    }
+}
+
+
+/* ================= CART OPEN / CLOSE ================= */
 
 function openCart() {
 
-    cartPanel.classList.add("active");
+    if (cartPanel) {
+        cartPanel.classList.add("active");
+    }
 
-    overlay.classList.add("active");
-
+    if (overlay) {
+        overlay.classList.add("active");
+    }
 }
 
-
-/* ================= CLOSE CART ================= */
 
 function closeCartPanel() {
 
-    cartPanel.classList.remove("active");
+    if (cartPanel) {
+        cartPanel.classList.remove("active");
+    }
 
-    overlay.classList.remove("active");
-
+    if (overlay) {
+        overlay.classList.remove("active");
+    }
 }
 
 
-/* ================= CART BUTTON ================= */
+if (cartButton) {
 
-cartButton.addEventListener("click", function () {
-
-    openCart();
-
-});
-
-
-/* ================= CLOSE BUTTON ================= */
-
-closeCart.addEventListener("click", function () {
-
-    closeCartPanel();
-
-});
+    cartButton.addEventListener(
+        "click",
+        openCart
+    );
+}
 
 
-/* ================= OVERLAY ================= */
+if (closeCart) {
 
-overlay.addEventListener("click", function () {
+    closeCart.addEventListener(
+        "click",
+        closeCartPanel
+    );
+}
 
-    closeCartPanel();
 
-});
+if (overlay) {
+
+    overlay.addEventListener(
+        "click",
+        closeCartPanel
+    );
+}
 
 
 /* ================= ADD TO CART ================= */
 
-const buyButtons = document.querySelectorAll(".buy-btn");
+function addToCart(button) {
+
+    const name =
+        button.dataset.name;
+
+    const price =
+        Number(button.dataset.price);
 
 
-buyButtons.forEach(function (button) {
+    if (
+        !name ||
+        Number.isNaN(price) ||
+        price < 0
+    ) {
 
-    button.addEventListener("click", function () {
-
-        const name = button.dataset.name;
-
-        const price = Number(button.dataset.price);
+        return;
+    }
 
 
-        const existingItem = cart.find(function (item) {
+    const existingItem =
+        cart.find(function (item) {
 
             return item.name === name;
-
         });
 
 
-        if (existingItem) {
+    if (existingItem) {
 
-            existingItem.quantity++;
+        existingItem.quantity++;
 
-        } else {
+    } else {
 
-            cart.push({
+        cart.push({
 
-                name: name,
+            name: name,
 
-                price: price,
+            price: price,
 
-                quantity: 1
-
-            });
-
-        }
+            quantity: 1
+        });
+    }
 
 
-        updateCart();
+    saveCart();
 
-        openCart();
+    updateCart();
 
+    openCart();
+}
+
+
+/* ================= BUY BUTTONS ================= */
+
+function attachBuyButtons() {
+
+    const buyButtons =
+        document.querySelectorAll(".buy-btn");
+
+
+    buyButtons.forEach(function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                addToCart(button);
+            }
+        );
     });
+}
 
-});
+
+attachBuyButtons();
 
 
 /* ================= UPDATE CART ================= */
 
 function updateCart() {
+
+    if (!cartItems) {
+        return;
+    }
+
 
     cartItems.innerHTML = "";
 
@@ -143,40 +222,81 @@ function updateCart() {
 
     } else {
 
-        cart.forEach(function (item, index) {
+        cart.forEach(
+            function (item, index) {
 
-            const cartItem = document.createElement("div");
+                const cartItem =
+                    document.createElement("div");
 
-            cartItem.className = "cart-item";
-
-
-            cartItem.innerHTML = `
-
-                <div class="cart-item-info">
-
-                    <h4>
-                        ${item.name}
-                    </h4>
-
-                    <p>
-                        ₹${item.price} × ${item.quantity}
-                    </p>
-
-                </div>
-
-                <button
-                    class="remove-item"
-                    data-index="${index}">
-                    Remove
-                </button>
-
-            `;
+                cartItem.className =
+                    "cart-item";
 
 
-            cartItems.appendChild(cartItem);
+                cartItem.innerHTML = `
 
-        });
+                    <div class="cart-item-info">
 
+                        <h4>
+                            ${escapeHTML(item.name)}
+                        </h4>
+
+                        <p>
+                            ₹${item.price.toLocaleString("en-IN")}
+                        </p>
+
+                    </div>
+
+
+                    <div class="cart-item-controls">
+
+                        <button
+                            type="button"
+                            class="quantity-btn decrease-btn"
+                            data-index="${index}">
+                            −
+                        </button>
+
+
+                        <span class="quantity">
+                            ${item.quantity}
+                        </span>
+
+
+                        <button
+                            type="button"
+                            class="quantity-btn increase-btn"
+                            data-index="${index}">
+                            +
+                        </button>
+
+                    </div>
+
+
+                    <div class="cart-item-subtotal">
+
+                        ₹${(
+                            item.price *
+                            item.quantity
+                        ).toLocaleString("en-IN")}
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        class="remove-item"
+                        data-index="${index}">
+                        Remove
+                    </button>
+
+                `;
+
+
+                cartItems.appendChild(
+                    cartItem
+                );
+            }
+        );
     }
 
 
@@ -184,8 +304,7 @@ function updateCart() {
 
     updateCartTotal();
 
-    addRemoveEvents();
-
+    attachCartEvents();
 }
 
 
@@ -199,12 +318,14 @@ function updateCartCount() {
     cart.forEach(function (item) {
 
         count += item.quantity;
-
     });
 
 
-    cartCount.textContent = count;
+    if (cartCount) {
 
+        cartCount.textContent =
+            count;
+    }
 }
 
 
@@ -217,108 +338,643 @@ function updateCartTotal() {
 
     cart.forEach(function (item) {
 
-        total += item.price * item.quantity;
-
+        total +=
+            item.price *
+            item.quantity;
     });
 
 
-    cartTotal.textContent = "₹" + total.toLocaleString("en-IN");
+    if (cartTotal) {
 
+        cartTotal.textContent =
+            "₹" +
+            total.toLocaleString("en-IN");
+    }
 }
 
 
-/* ================= REMOVE ITEMS ================= */
+/* ================= QUANTITY CONTROLS ================= */
 
-function addRemoveEvents() {
+function attachCartEvents() {
+
+    const increaseButtons =
+        document.querySelectorAll(
+            ".increase-btn"
+        );
+
+
+    const decreaseButtons =
+        document.querySelectorAll(
+            ".decrease-btn"
+        );
+
 
     const removeButtons =
-        document.querySelectorAll(".remove-item");
+        document.querySelectorAll(
+            ".remove-item"
+        );
 
 
-    removeButtons.forEach(function (button) {
+    /* ================= INCREASE ================= */
 
-        button.addEventListener("click", function () {
+    increaseButtons.forEach(
+        function (button) {
 
-            const index =
-                Number(button.dataset.index);
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const index =
+                        Number(
+                            button.dataset.index
+                        );
 
 
-            cart.splice(index, 1);
+                    if (
+                        !Number.isNaN(index) &&
+                        cart[index]
+                    ) {
+
+                        cart[index].quantity++;
+
+                        saveCart();
+
+                        updateCart();
+                    }
+                }
+            );
+        }
+    );
 
 
-            updateCart();
+    /* ================= DECREASE ================= */
 
-        });
+    decreaseButtons.forEach(
+        function (button) {
 
-    });
+            button.addEventListener(
+                "click",
+                function () {
 
+                    const index =
+                        Number(
+                            button.dataset.index
+                        );
+
+
+                    if (
+                        !Number.isNaN(index) &&
+                        cart[index]
+                    ) {
+
+                        cart[index].quantity--;
+
+
+                        if (
+                            cart[index].quantity <= 0
+                        ) {
+
+                            cart.splice(
+                                index,
+                                1
+                            );
+                        }
+
+
+                        saveCart();
+
+                        updateCart();
+                    }
+                }
+            );
+        }
+    );
+
+
+    /* ================= REMOVE ================= */
+
+    removeButtons.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function () {
+
+                    const index =
+                        Number(
+                            button.dataset.index
+                        );
+
+
+                    if (
+                        !Number.isNaN(index)
+                    ) {
+
+                        cart.splice(
+                            index,
+                            1
+                        );
+
+                        saveCart();
+
+                        updateCart();
+                    }
+                }
+            );
+        }
+    );
+}
+
+
+/* ================= HTML SECURITY ================= */
+
+function escapeHTML(value) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = value;
+
+    return div.innerHTML;
 }
 
 
 /* ================= CHECKOUT ================= */
 
-checkoutBtn.addEventListener("click", function () {
+if (checkoutBtn) {
 
-    if (cart.length === 0) {
+    checkoutBtn.addEventListener(
+        "click",
+        function () {
 
-        alert("Your cart is empty.");
+            if (cart.length === 0) {
 
-        return;
+                alert(
+                    "Your cart is empty."
+                );
 
-    }
+                return;
+            }
 
 
-    alert(
-        "Demo checkout only.\n\n" +
-        "This project does not process real payments."
+            alert(
+                "Demo checkout only.\n\n" +
+                "This project does not process real payments."
+            );
+        }
+    );
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+const menuToggle =
+    document.getElementById(
+        "menuToggle"
     );
 
-});
+
+const mobileMenu =
+    document.getElementById(
+        "mobileMenu"
+    );
 
 
-/* ================= ESC KEY ================= */
+if (
+    menuToggle &&
+    mobileMenu
+) {
 
-document.addEventListener("keydown", function (event) {
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
-    if (event.key === "Escape") {
+            const isOpen =
+                mobileMenu.classList.toggle(
+                    "active"
+                );
 
-        closeCartPanel();
 
+            menuToggle.setAttribute(
+                "aria-expanded",
+                isOpen
+                    ? "true"
+                    : "false"
+            );
+
+
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen
+                    ? "Close menu"
+                    : "Open menu"
+            );
+        }
+    );
+
+
+    const mobileLinks =
+        mobileMenu.querySelectorAll(
+            "a"
+        );
+
+
+    mobileLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function () {
+
+                    mobileMenu.classList.remove(
+                        "active"
+                    );
+
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+
+                    menuToggle.setAttribute(
+                        "aria-label",
+                        "Open menu"
+                    );
+                }
+            );
+        }
+    );
+}
+
+
+/* ================= SEARCH ================= */
+
+const siteSearch =
+    document.getElementById(
+        "siteSearch"
+    );
+
+
+const searchButton =
+    document.getElementById(
+        "searchButton"
+    );
+
+
+const mainSearch =
+    document.getElementById(
+        "mainSearch"
+    );
+
+
+const mainSearchButton =
+    document.getElementById(
+        "mainSearchButton"
+    );
+
+
+const searchStatus =
+    document.getElementById(
+        "searchStatus"
+    );
+
+
+const searchableItems =
+    document.querySelectorAll(
+        ".product-card, .gift-card, .game-feature"
+    );
+
+
+/* ================= PERFORM SEARCH ================= */
+
+function performSearch(searchValue) {
+
+    const query =
+        searchValue
+            .trim()
+            .toLowerCase();
+
+
+    if (!query) {
+
+        searchableItems.forEach(
+            function (item) {
+
+                item.style.display = "";
+            }
+        );
+
+
+        if (searchStatus) {
+
+            searchStatus.textContent = "";
+        }
+
+
+        return;
     }
 
-});
+
+    let matches = 0;
+
+
+    searchableItems.forEach(
+        function (item) {
+
+            const text =
+                item.textContent
+                    .toLowerCase();
+
+
+            const match =
+                text.includes(query);
+
+
+            item.style.display =
+                match
+                    ? ""
+                    : "none";
+
+
+            if (match) {
+                matches++;
+            }
+        }
+    );
+
+
+    if (searchStatus) {
+
+        if (matches === 0) {
+
+            searchStatus.textContent =
+                `No products found for "${searchValue.trim()}".`;
+
+        } else {
+
+            searchStatus.textContent =
+                `${matches} result${matches === 1 ? "" : "s"} found.`;
+        }
+    }
+
+
+    const firstMatch =
+        Array.from(
+            searchableItems
+        ).find(
+            function (item) {
+
+                return (
+                    item.style.display !==
+                    "none"
+                );
+            }
+        );
+
+
+    if (firstMatch) {
+
+        firstMatch.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+        });
+    }
+}
+
+
+/* ================= SYNC SEARCH BOXES ================= */
+
+function syncSearchInputs(value) {
+
+    if (
+        siteSearch &&
+        siteSearch.value !== value
+    ) {
+
+        siteSearch.value = value;
+    }
+
+
+    if (
+        mainSearch &&
+        mainSearch.value !== value
+    ) {
+
+        mainSearch.value = value;
+    }
+}
+
+
+/* ================= RUN SEARCH ================= */
+
+function runSearch(value) {
+
+    syncSearchInputs(value);
+
+    performSearch(value);
+}
+
+
+/* ================= NAVBAR SEARCH ================= */
+
+if (
+    searchButton &&
+    siteSearch
+) {
+
+    searchButton.addEventListener(
+        "click",
+        function () {
+
+            runSearch(
+                siteSearch.value
+            );
+        }
+    );
+
+
+    siteSearch.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                runSearch(
+                    siteSearch.value
+                );
+            }
+        }
+    );
+}
+
+
+/* ================= MAIN SEARCH ================= */
+
+if (
+    mainSearchButton &&
+    mainSearch
+) {
+
+    mainSearchButton.addEventListener(
+        "click",
+        function () {
+
+            runSearch(
+                mainSearch.value
+            );
+        }
+    );
+
+
+    mainSearch.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                runSearch(
+                    mainSearch.value
+                );
+            }
+        }
+    );
+}
+
+
+/* ================= CLEAR SEARCH ================= */
+
+if (siteSearch) {
+
+    siteSearch.addEventListener(
+        "input",
+        function () {
+
+            if (
+                siteSearch.value.trim() === ""
+            ) {
+
+                runSearch("");
+            }
+        }
+    );
+}
+
+
+if (mainSearch) {
+
+    mainSearch.addEventListener(
+        "input",
+        function () {
+
+            if (
+                mainSearch.value.trim() === ""
+            ) {
+
+                runSearch("");
+            }
+        }
+    );
+}
+
+
+/* ================= ESCAPE KEY ================= */
+
+document.addEventListener(
+    "keydown",
+    function (event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeCartPanel();
+
+
+            if (
+                mobileMenu &&
+                menuToggle
+            ) {
+
+                mobileMenu.classList.remove(
+                    "active"
+                );
+
+
+                menuToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Open menu"
+                );
+            }
+        }
+    }
+);
 
 
 /* ================= FAQ ================= */
 
 const faqDetails =
-    document.querySelectorAll("details");
+    document.querySelectorAll(
+        "details"
+    );
 
 
-faqDetails.forEach(function (detail) {
+faqDetails.forEach(
+    function (detail) {
 
-    detail.addEventListener("toggle", function () {
+        detail.addEventListener(
+            "toggle",
+            function () {
 
-        if (detail.open) {
+                if (detail.open) {
 
-            faqDetails.forEach(function (otherDetail) {
+                    faqDetails.forEach(
+                        function (
+                            otherDetail
+                        ) {
 
-                if (otherDetail !== detail) {
+                            if (
+                                otherDetail !==
+                                detail
+                            ) {
 
-                    otherDetail.removeAttribute("open");
-
+                                otherDetail.removeAttribute(
+                                    "open"
+                                );
+                            }
+                        }
+                    );
                 }
-
-            });
-
-        }
-
-    });
-
-});
+            }
+        );
+    }
+);
 
 
-/* ================= CONSOLE MESSAGE ================= */
+/* ================= INITIALIZE ================= */
+
+loadCart();
+
+updateCart();
+
+
+/* ================= CONSOLE ================= */
 
 console.log(
     "KUN4L Gaming Store loaded successfully!"

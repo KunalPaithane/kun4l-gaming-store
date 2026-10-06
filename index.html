@@ -23,18 +23,63 @@
                 KUN<span>4</span>L
             </a>
 
-            <nav class="nav-links">
+            <nav class="nav-links" aria-label="Main navigation">
                 <a href="#home">Home</a>
                 <a href="#valorant">Valorant</a>
+                <a href="#games">Games</a>
                 <a href="#giftcards">Gift Cards</a>
                 <a href="#videos">Videos</a>
                 <a href="#faq">FAQ</a>
             </nav>
 
-            <button class="cart-button" id="cartButton">
-                🛒
-                <span id="cartCount">0</span>
-            </button>
+            <div class="nav-actions">
+
+                <div class="nav-search">
+                    <input
+                        type="search"
+                        id="siteSearch"
+                        placeholder="Search products..."
+                        aria-label="Search products"
+                    >
+
+                    <button
+                        type="button"
+                        id="searchButton"
+                        aria-label="Search">
+                        🔍
+                    </button>
+                </div>
+
+                <button
+                    class="cart-button"
+                    id="cartButton"
+                    aria-label="Open shopping cart">
+                    🛒
+                    <span id="cartCount">0</span>
+                </button>
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Open menu"
+                    aria-expanded="false">
+                    ☰
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="mobile-menu" id="mobileMenu">
+
+            <a href="#home">Home</a>
+            <a href="#valorant">Valorant</a>
+            <a href="#games">Games</a>
+            <a href="#giftcards">Gift Cards</a>
+            <a href="#videos">Videos</a>
+            <a href="#faq">FAQ</a>
 
         </div>
 
@@ -75,6 +120,7 @@
 
             </div>
 
+
             <div class="hero-visual">
 
                 <div class="hero-circle"></div>
@@ -96,6 +142,86 @@
         </section>
 
 
+        <!-- ================= QUICK SHOP ================= -->
+
+        <section class="quick-shop section" aria-label="Quick shop">
+
+            <div class="quick-shop-header">
+
+                <div>
+
+                    <p class="small-label">QUICK SHOP</p>
+
+                    <h2>
+                        FIND YOUR
+                        <span>GAME</span>
+                    </h2>
+
+                </div>
+
+                <p class="quick-shop-text">
+                    Browse popular categories or search for a product.
+                </p>
+
+            </div>
+
+
+            <div class="shop-search">
+
+                <input
+                    type="search"
+                    id="mainSearch"
+                    placeholder="Search Valorant Points, games, gift cards..."
+                    aria-label="Search the store"
+                >
+
+                <button
+                    type="button"
+                    id="mainSearchButton">
+                    Search
+                </button>
+
+            </div>
+
+
+            <div class="category-links">
+
+                <a href="#valorant" class="category-link">
+                    <span>🎯</span>
+                    <strong>Valorant</strong>
+                    <small>Points &amp; credits</small>
+                </a>
+
+                <a href="#games" class="category-link">
+                    <span>🎮</span>
+                    <strong>Games</strong>
+                    <small>Gaming gear</small>
+                </a>
+
+                <a href="#giftcards" class="category-link">
+                    <span>🎁</span>
+                    <strong>Gift Cards</strong>
+                    <small>Gaming cards</small>
+                </a>
+
+                <a href="#videos" class="category-link">
+                    <span>▶️</span>
+                    <strong>Videos</strong>
+                    <small>KUN4L content</small>
+                </a>
+
+            </div>
+
+
+            <p
+                class="search-status"
+                id="searchStatus"
+                aria-live="polite">
+            </p>
+
+        </section>
+
+
         <!-- ================= COMMUNITY ================= -->
 
         <section class="community section">
@@ -110,6 +236,7 @@
                 </h2>
 
             </div>
+
 
             <div class="community-content">
 
@@ -131,17 +258,21 @@
 
         <!-- ================= VALORANT ================= -->
 
-        <section class="products-section section" id="valorant">
+        <section
+            class="products-section section"
+            id="valorant">
 
             <div class="section-top">
 
                 <div>
+
                     <p class="small-label">FEATURED</p>
 
                     <h2>
                         VALORANT
                         <span>POINTS</span>
                     </h2>
+
                 </div>
 
                 <a href="#valorant" class="view-all">
@@ -178,12 +309,18 @@
 
             <div class="product-grid">
 
+
+                <!-- 475 VP -->
+
                 <article class="product-card">
 
                     <div class="product-image vp-red">
+
                         <span>475</span>
                         VP
+
                     </div>
+
 
                     <div class="product-info">
 
@@ -209,12 +346,17 @@
                 </article>
 
 
+                <!-- 1000 VP -->
+
                 <article class="product-card">
 
                     <div class="product-image vp-purple">
+
                         <span>1000</span>
                         VP
+
                     </div>
+
 
                     <div class="product-info">
 
@@ -240,12 +382,17 @@
                 </article>
 
 
+                <!-- 2050 VP -->
+
                 <article class="product-card">
 
                     <div class="product-image vp-blue">
+
                         <span>2050</span>
                         VP
+
                     </div>
+
 
                     <div class="product-info">
 
@@ -271,12 +418,17 @@
                 </article>
 
 
+                <!-- 3650 VP -->
+
                 <article class="product-card">
 
                     <div class="product-image vp-orange">
+
                         <span>3650</span>
                         VP
+
                     </div>
+
 
                     <div class="product-info">
 
@@ -301,12 +453,270 @@
 
                 </article>
 
+
             </div>
 
         </section>
 
 
-        <!-- ================= GAMES ================= -->
+        <!-- ================= GAMING PRODUCTS ================= -->
+
+        <section
+            class="products-section section"
+            id="games">
+
+            <div class="section-top">
+
+                <div>
+
+                    <p class="small-label">GAMING GEAR</p>
+
+                    <h2>
+                        LEVEL UP YOUR
+                        <span>SETUP</span>
+                    </h2>
+
+                </div>
+
+                <a href="#games" class="view-all">
+                    View All →
+                </a>
+
+            </div>
+
+
+            <div class="featured-banner">
+
+                <div class="banner-content">
+
+                    <p>BUILT FOR GAMERS</p>
+
+                    <h3>
+                        GAMING
+                        <span>GEAR</span>
+                    </h3>
+
+                    <p>
+                        Explore gaming accessories designed
+                        for your ultimate setup.
+                    </p>
+
+                </div>
+
+                <div class="banner-symbol">
+                    🎮
+                </div>
+
+            </div>
+
+
+            <div class="product-grid">
+
+
+                <!-- Gaming Mouse -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-mouse">
+                        🖱️
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L Gaming Mouse</h3>
+
+                        <p>High precision gaming mouse</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹1,499</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L Gaming Mouse"
+                                data-price="1499">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Mechanical Keyboard -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-keyboard">
+                        ⌨️
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L Mechanical Keyboard</h3>
+
+                        <p>RGB mechanical gaming keyboard</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹2,499</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L Mechanical Keyboard"
+                                data-price="2499">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Gaming Headset -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-headset">
+                        🎧
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L Gaming Headset</h3>
+
+                        <p>Immersive gaming audio</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹1,999</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L Gaming Headset"
+                                data-price="1999">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Gaming Mouse Pad -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-mousepad">
+                        🖥️
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L XL Gaming Mouse Pad</h3>
+
+                        <p>Extended desk gaming mat</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹799</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L XL Gaming Mouse Pad"
+                                data-price="799">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Gaming Controller -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-controller">
+                        🎮
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L Gaming Controller</h3>
+
+                        <p>Wireless gaming controller</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹2,299</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L Gaming Controller"
+                                data-price="2299">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- Gaming IEM -->
+
+                <article class="product-card">
+
+                    <div class="product-image gaming-iem">
+                        🎧
+                    </div>
+
+
+                    <div class="product-info">
+
+                        <h3>KUN4L Gaming IEM</h3>
+
+                        <p>Low-latency gaming earphones</p>
+
+                        <div class="product-bottom">
+
+                            <strong>₹1,299</strong>
+
+                            <button
+                                class="buy-btn"
+                                data-name="KUN4L Gaming IEM"
+                                data-price="1299">
+                                Add
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DIGITAL GAME ================= -->
 
         <section class="games section">
 
@@ -337,9 +747,12 @@
 
                 </div>
 
+
                 <div class="game-info">
 
-                    <p class="small-label">FEATURED GAME</p>
+                    <p class="small-label">
+                        FEATURED GAME
+                    </p>
 
                     <h3>The Alley</h3>
 
@@ -364,13 +777,17 @@
 
         <!-- ================= GIFT CARDS ================= -->
 
-        <section class="gift-section section" id="giftcards">
+        <section
+            class="gift-section section"
+            id="giftcards">
 
             <div class="section-top">
 
                 <div>
 
-                    <p class="small-label">DIGITAL CARDS</p>
+                    <p class="small-label">
+                        DIGITAL CARDS
+                    </p>
 
                     <h2>
                         ALL
@@ -384,9 +801,14 @@
 
             <div class="gift-grid">
 
+
+                <!-- Valorant -->
+
                 <article class="gift-card valorant-card">
 
-                    <div class="gift-icon">V</div>
+                    <div class="gift-icon">
+                        V
+                    </div>
 
                     <h3>Valorant</h3>
 
@@ -402,9 +824,13 @@
                 </article>
 
 
+                <!-- Roblox -->
+
                 <article class="gift-card roblox-card">
 
-                    <div class="gift-icon">R</div>
+                    <div class="gift-icon">
+                        R
+                    </div>
 
                     <h3>Roblox</h3>
 
@@ -420,9 +846,13 @@
                 </article>
 
 
+                <!-- Discord -->
+
                 <article class="gift-card discord-card">
 
-                    <div class="gift-icon">D</div>
+                    <div class="gift-icon">
+                        D
+                    </div>
 
                     <h3>Discord</h3>
 
@@ -438,9 +868,13 @@
                 </article>
 
 
+                <!-- Steam -->
+
                 <article class="gift-card steam-card">
 
-                    <div class="gift-icon">S</div>
+                    <div class="gift-icon">
+                        S
+                    </div>
 
                     <h3>Steam</h3>
 
@@ -456,9 +890,13 @@
                 </article>
 
 
+                <!-- ExitLag -->
+
                 <article class="gift-card exitlag-card">
 
-                    <div class="gift-icon">E</div>
+                    <div class="gift-icon">
+                        E
+                    </div>
 
                     <h3>ExitLag</h3>
 
@@ -472,6 +910,7 @@
                     </button>
 
                 </article>
+
 
             </div>
 
@@ -517,18 +956,24 @@
             <div class="stats">
 
                 <div>
+
                     <strong>1K+</strong>
                     <span>Gaming Products</span>
+
                 </div>
 
                 <div>
+
                     <strong>24/7</strong>
                     <span>Digital Access</span>
+
                 </div>
 
                 <div>
+
                     <strong>100%</strong>
                     <span>Gaming Focused</span>
+
                 </div>
 
             </div>
@@ -538,13 +983,17 @@
 
         <!-- ================= VIDEOS ================= -->
 
-        <section class="videos section" id="videos">
+        <section
+            class="videos section"
+            id="videos">
 
             <div class="section-top">
 
                 <div>
 
-                    <p class="small-label">CONTENT</p>
+                    <p class="small-label">
+                        CONTENT
+                    </p>
 
                     <h2>
                         STREAMS &
@@ -558,13 +1007,28 @@
 
             <div class="video-grid">
 
+
+                <!-- Fast Raze Gameplay -->
+
                 <article class="video-card">
 
-                    <div class="video-thumbnail thumbnail-one">
+                    <a
+                        href="https://youtu.be/1aIZjfL164Q"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="video-thumbnail">
 
-                        <span class="play-button">▶</span>
+                        <img
+                            src="https://img.youtube.com/vi/1aIZjfL164Q/maxresdefault.jpg"
+                            alt="Fast Raze Gameplay thumbnail"
+                        >
 
-                    </div>
+                        <span class="play-button">
+                            ▶
+                        </span>
+
+                    </a>
+
 
                     <div class="video-info">
 
@@ -579,13 +1043,27 @@
                 </article>
 
 
+                <!-- Insane Gaming Moments -->
+
                 <article class="video-card">
 
-                    <div class="video-thumbnail thumbnail-two">
+                    <a
+                        href="https://youtu.be/YtCU27Cu8TY"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="video-thumbnail">
 
-                        <span class="play-button">▶</span>
+                        <img
+                            src="https://img.youtube.com/vi/YtCU27Cu8TY/maxresdefault.jpg"
+                            alt="Insane Gaming Moments thumbnail"
+                        >
 
-                    </div>
+                        <span class="play-button">
+                            ▶
+                        </span>
+
+                    </a>
+
 
                     <div class="video-info">
 
@@ -600,13 +1078,27 @@
                 </article>
 
 
+                <!-- One Round. One Ace. -->
+
                 <article class="video-card">
 
-                    <div class="video-thumbnail thumbnail-three">
+                    <a
+                        href="https://youtube.com/shorts/f3DWp-R01FA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="video-thumbnail">
 
-                        <span class="play-button">▶</span>
+                        <img
+                            src="https://img.youtube.com/vi/f3DWp-R01FA/maxresdefault.jpg"
+                            alt="One Round. One Ace. thumbnail"
+                        >
 
-                    </div>
+                        <span class="play-button">
+                            ▶
+                        </span>
+
+                    </a>
+
 
                     <div class="video-info">
 
@@ -621,13 +1113,27 @@
                 </article>
 
 
+                <!-- KUN4L Live Gameplay -->
+
                 <article class="video-card">
 
-                    <div class="video-thumbnail thumbnail-four">
+                    <a
+                        href="https://www.youtube.com/live/uhZPPWk9zZs"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="video-thumbnail">
 
-                        <span class="play-button">▶</span>
+                        <img
+                            src="https://img.youtube.com/vi/uhZPPWk9zZs/maxresdefault.jpg"
+                            alt="KUN4L Live Gameplay thumbnail"
+                        >
 
-                    </div>
+                        <span class="play-button">
+                            ▶
+                        </span>
+
+                    </a>
+
 
                     <div class="video-info">
 
@@ -641,6 +1147,7 @@
 
                 </article>
 
+
             </div>
 
         </section>
@@ -648,53 +1155,63 @@
 
         <!-- ================= MY INVENTORY ================= -->
 
-<section class="inventory section">
+        <section class="inventory section">
 
-    <div class="inventory-header">
+            <div class="inventory-header">
 
-        <div>
-            <p class="small-label">MY VALORANT COLLECTION</p>
+                <div>
 
-            <h2>
-                MY
-                <span>INVENTORY</span>
-            </h2>
-        </div>
+                    <p class="small-label">
+                        MY VALORANT COLLECTION
+                    </p>
 
-    </div>
+                    <h2>
+                        MY
+                        <span>INVENTORY</span>
+                    </h2>
 
+                </div>
 
-    <div class="real-inventory">
-
-        <div class="inventory-caption">
-
-            <div>
-                <p class="small-label">KUN4L'S COLLECTION</p>
-
-                <h3>My Valorant Loadout</h3>
-
-                <p>
-                    A look at my current Valorant weapon
-                    collection and cosmetics.
-                </p>
             </div>
 
-        </div>
+
+            <div class="real-inventory">
+
+                <div class="inventory-caption">
+
+                    <div>
+
+                        <p class="small-label">
+                            KUN4L'S COLLECTION
+                        </p>
+
+                        <h3>
+                            My Valorant Loadout
+                        </h3>
+
+                        <p>
+                            A look at my current Valorant weapon
+                            collection and cosmetics.
+                        </p>
+
+                    </div>
+
+                </div>
 
 
-        <div class="inventory-image-wrapper">
+                <div class="inventory-image-wrapper">
 
-            <img
-                src="kun4l_inventory.jpg"
-                alt="KUN4L Valorant Inventory"
-                class="inventory-image"
-            >
+                    <img
+                        src="kun4l_inventory.jpg"
+                        alt="KUN4L Valorant Inventory"
+                        class="inventory-image"
+                    >
 
-        </div>
+                </div>
 
-    </div>
+            </div>
 
-</section>
+        </section>
 
 
         <!-- ================= BENEFITS ================= -->
@@ -703,7 +1220,9 @@
 
             <div class="benefits-heading">
 
-                <p class="small-label">WHY KUN4L?</p>
+                <p class="small-label">
+                    WHY KUN4L?
+                </p>
 
                 <h2>
                     BUILT BY GAMERS.
@@ -715,13 +1234,16 @@
 
             <div class="benefit-grid">
 
+
                 <div class="benefit">
 
                     <div class="benefit-number">
                         01
                     </div>
 
-                    <h3>Simple</h3>
+                    <h3>
+                        Simple
+                    </h3>
 
                     <p>
                         Clean and easy-to-use gaming store
@@ -737,7 +1259,9 @@
                         02
                     </div>
 
-                    <h3>Fast</h3>
+                    <h3>
+                        Fast
+                    </h3>
 
                     <p>
                         Designed around a quick and
@@ -753,7 +1277,9 @@
                         03
                     </div>
 
-                    <h3>Gaming First</h3>
+                    <h3>
+                        Gaming First
+                    </h3>
 
                     <p>
                         Created specifically for gamers
@@ -769,7 +1295,9 @@
                         04
                     </div>
 
-                    <h3>Community</h3>
+                    <h3>
+                        Community
+                    </h3>
 
                     <p>
                         Built around gaming content
@@ -778,6 +1306,7 @@
 
                 </div>
 
+
             </div>
 
         </section>
@@ -785,11 +1314,15 @@
 
         <!-- ================= FAQ ================= -->
 
-        <section class="faq section" id="faq">
+        <section
+            class="faq section"
+            id="faq">
 
             <div class="section-heading">
 
-                <p class="small-label">NEED HELP?</p>
+                <p class="small-label">
+                    NEED HELP?
+                </p>
 
                 <h2>
                     FREQUENTLY ASKED
@@ -800,6 +1333,7 @@
 
 
             <div class="faq-container">
+
 
                 <details>
 
@@ -864,6 +1398,7 @@
 
                 </details>
 
+
             </div>
 
         </section>
@@ -892,13 +1427,26 @@
 
             <div class="footer-links">
 
+
                 <div>
 
                     <h4>STORE</h4>
 
-                    <a href="#valorant">Valorant</a>
-                    <a href="#giftcards">Gift Cards</a>
-                    <a href="#videos">Videos</a>
+                    <a href="#valorant">
+                        Valorant
+                    </a>
+
+                    <a href="#games">
+                        Games
+                    </a>
+
+                    <a href="#giftcards">
+                        Gift Cards
+                    </a>
+
+                    <a href="#videos">
+                        Videos
+                    </a>
 
                 </div>
 
@@ -907,11 +1455,25 @@
 
                     <h4>CONNECT</h4>
 
-                    <a href="https://www.youtube.com/@kun4lreplayz"
-    target="_blank"
-    rel="noopener noreferrer">YouTube</a>
-                    <a href="#" onclick="return false;">Instagram</a>
-                    <a href="#" onclick="return false;">Discord</a>
+                    <a
+                        href="https://www.youtube.com/@kun4lreplayz"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        YouTube
+                    </a>
+
+                    <a
+                        href="https://www.instagram.com/kun4lreplayz/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Instagram
+                    </a>
+
+                    <a
+                        href="#"
+                        onclick="return false;">
+                        Discord
+                    </a>
 
                 </div>
 
@@ -920,10 +1482,16 @@
 
                     <h4>PROJECT</h4>
 
-                    <a href="#home">Home</a>
-                    <a href="#faq">FAQ</a>
+                    <a href="#home">
+                        Home
+                    </a>
+
+                    <a href="#faq">
+                        FAQ
+                    </a>
 
                 </div>
+
 
             </div>
 
@@ -937,7 +1505,7 @@
             </p>
 
             <p>
-                Built with HTML, CSS & JavaScript.
+                Built with HTML, CSS &amp; JavaScript.
             </p>
 
         </div>
@@ -947,14 +1515,22 @@
 
     <!-- ================= CART ================= -->
 
-    <div class="overlay" id="overlay"></div>
+    <div
+        class="overlay"
+        id="overlay">
+    </div>
 
 
-    <aside class="cart-panel" id="cartPanel">
+    <aside
+        class="cart-panel"
+        id="cartPanel">
+
 
         <div class="cart-header">
 
-            <h2>Your Cart</h2>
+            <h2>
+                Your Cart
+            </h2>
 
             <button id="closeCart">
                 ×
@@ -963,7 +1539,9 @@
         </div>
 
 
-        <div class="cart-items" id="cartItems">
+        <div
+            class="cart-items"
+            id="cartItems">
 
             <div class="empty-cart">
                 Your cart is empty.
@@ -976,7 +1554,9 @@
 
             <div class="cart-total">
 
-                <span>Total</span>
+                <span>
+                    Total
+                </span>
 
                 <strong id="cartTotal">
                     ₹0
@@ -984,11 +1564,15 @@
 
             </div>
 
-            <button class="checkout-btn" id="checkoutBtn">
+
+            <button
+                class="checkout-btn"
+                id="checkoutBtn">
                 Checkout
             </button>
 
         </div>
+
 
     </aside>
 
